@@ -1,0 +1,146 @@
+.header {
+  background-color: var(--main-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: var(--header-height);
+  transition: all 300ms;
+
+  @include tablet {
+    height: var(--header-tablet-height);
+  }
+  @include mobile {
+    height: var(--header-mobile-height);
+  }
+
+  .container {
+    height: 100%;
+  }
+
+  &.shrink {
+    height: var(--header-shrink-height);
+    box-shadow: var(--box-shadow);
+    z-index: 100;
+
+    .header__logo {
+      span {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  &__logo {
+    @include flex(center, center);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: all 300ms;
+
+    span {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Lobster', sans-serif;
+      transition: all 300ms;
+      background: -webkit-linear-gradient(80deg, #008140, #6de039);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    img {
+      height: 28px;
+    }
+  }
+
+  &__menu {
+    @include flex(center, space-between);
+    height: 100%;
+    font-weight: 600;
+    font-size: 1.5rem;
+
+    &__mobile--toggle {
+      display: none;
+
+      @include tablet {
+        display: block;
+      }
+      @include mobile {
+        display: block;
+      }
+    }
+
+    &__item {
+      transition: all 300ms;
+    }
+
+    &__item ~ &__item {
+      margin-left: 40px;
+
+      @include mobile {
+        margin-left: 20px;
+      }
+    }
+
+    &__item.active {
+      color: var(--main-color);
+    }
+
+    &__item:hover {
+      color: var(--main-color);
+    }
+
+    &__left,
+    &__right {
+      @include flex(center, center);
+      height: 100%;
+    }
+
+    &__left {
+      &__close {
+        display: none;
+      }
+      @include tablet {
+        flex-direction: column;
+        background-color: var(--main-bg);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        justify-content: flex-start;
+        padding-top: 30px;
+        transform: translateX(-100%);
+        transition: 300ms;
+
+        &.active {
+          transform: translateX(0);
+        }
+
+        &__item ~ &__item {
+          margin: 0;
+        }
+        &__close {
+          display: block;
+          position: absolute;
+          left: 20px;
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    &__right {
+      font-size: 2.25rem;
+      &__item {
+        @include flex(center, center);
+
+        @include tablet {
+          margin-left: 10px;
+        }
+      }
+      @include mobile {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
